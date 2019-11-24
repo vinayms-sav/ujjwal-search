@@ -1,0 +1,18 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+   <a class="navbar-brand">Angular Search</a>
+   <form class="form-inline">
+     <input class="form-control mr-sm-2" [(ngModel)]="searchField" name="search" type="search" placeholder="Search" aria-label="Search">
+     <button (click)="search()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+   </form>
+ </nav>
+<div class="d-flex  flex-column pt-3 w-100 ">
+   <div class="list-outer-div d-flex flex-column w-50 align-self-center border rounded border-success px-5">
+      <div *ngIf="showKeyword" class="searched-header border-bottom">Your keyword : <span class="keyword">{{keyword}}</span></div>
+      <div *ngIf="!showKeyword" class="default-header border-bottom">List</div>
+      <div *ngFor="let item of realData | paginate: { itemsPerPage: 10 , currentPage: p };" class="list "><a class="list-link" target="_blank" href="{{item.url}}">{{item.title}}</a>
+      </div>
+      <pagination-controls class="my-pagination  pl-0" (pageChange)="p = $event" maxSize="10" directionLinks="true"
+         autoHide="true" responsive="false" previousLabel="" nextLabel="" screenReaderPaginationLabel="Pagination"
+         screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+   </div>
+</div>
